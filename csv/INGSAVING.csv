@@ -1,0 +1,3 @@
+"Datum";"Omschrijving";"Rekening";"Rekening naam";"Tegenrekening";"Af Bij";"Bedrag";"Valuta";"Mutatiesoort";"Mededelingen";"Saldo na mutatie"
+"2020-12-01";"Rente";"H 123-45678";"Oranje Spaarrekening";"";"Bij";"0,01";"EUR";"Rente";"";"0.01"
+"2020-05-20";"Overboeking van betaalrekening NL12INGB1234567890";"H 123-45678";"Oranje Spaarrekening";"NL12INGB1234567890";"Bij";"100,00";"EUR";"Inleg";"";"100,01"

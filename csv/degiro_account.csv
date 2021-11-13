@@ -1,0 +1,5 @@
+Datum,Tijd,Valutadatum,Product,ISIN,Omschrijving,FX,Mutatie,,Saldo,,Order Id
+31-12-2020,7:52,30-12-2020,,,DEGIRO Corporate Action Kosten,,USD,"-6,46",USD,"17,78",
+06/01/2020,0:00,05/01/2020,MORGAN STANLEY EUR LIQUIDITY FUND,LU1959429272,Koersverandering geldmarktfonds (EUR),,EUR,"-0,00",EUR,"16,27",
+16-11-2020,7:43,13-11-2020,,,DEGIRO Corporate Action Kosten,,EUR,"-0,10",EUR,"29,34",
+16-11-2020,7:41,13-11-2020,ASML HOLDING,NL0010273215,Dividend,,EUR,"1,20",EUR,"29,44",

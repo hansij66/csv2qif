@@ -1,0 +1,49 @@
+# Harmonize account names to one unique identifiable GnuCash account
+# Convert any account number to GnuCash account name
+
+# TODO # There can be multiple entries for one unique GnuCash account; eg via IBAN and via pre-IBAN account nr
+# There can be only one entry per one unique GnuCash account
+
+# Python dictionary; separator = |
+# KEY | VALUE
+# IBAN | GnuCash Account Name | !Type
+
+# Priority and duplicate transactions:
+# If you have a transfer from account1 to account2 and
+# both accounts are a GnuCash account, and you download
+# statements for both accounts, you will end up with same
+# transaction twice in GnuCash:
+#   from account1 to account2 amount is X euros
+#   from account2 to account 1 amount is -X euros
+# Based on order in this file (= priority), it is decided
+# which transaction will be ignored.
+# If the accountFrom has a lower priority than accountTo,
+# transaction will be ignored, as the accountTo download will
+# add this transaction.
+# Chose priority eg based on better quality Memo information
+# or quality of payee information
+
+#VALID_ACCOUNT_TYPES
+#    'Cash',
+#    'Bank',
+#    'CCard',
+#    'Oth A',
+#    'Oth L',
+#    'Invoice',
+#    'Invst'
+
+
+
+
+NL12RABO1234567890 | Asset:Bank:RaboBetaalrekening | Bank
+NL12INGB1234567890 | Asset:Bank:ING | Bank
+H 123-45678 | Asset:Bank:ING Oranje Spaarrekening | Bank
+
+#Rabo Beleggen
+31234567 | Asset:Investments:Rabo Beleggen | Invst
+
+# You can only have one DeGiro account....csv file does not contain any account info
+# DeGiro Account
+NL12ABNA1234567890 | Asset:Investments:DeGiro | Invst
+# IDEAL to DeGiro
+NL33ABNA0577685503 | Asset:Investments:DeGiro | Invst

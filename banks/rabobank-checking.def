@@ -1,0 +1,62 @@
+# There is 1 header
+SKIPHEADERS 1
+
+# Delimiter is a comma
+DELIMITER ,
+QUOTECHAR "
+
+# CSV Fields in one row, starting at 0, which will be used
+# to identify the CSV File
+ROW_FINGERPRINT 1
+COL_FINGERPRINT 0
+# REGEX how to recognize csv file
+FINGERPRINTREGEX ^.*NL[0-9]{2}RABO[0-9]{10}$
+# Parser which will be called when this CSV File matches the fingerprint of this def file
+CSVPARSER readRabobankCheckingCSV
+
+# Fields, starting at 0
+COL_DATE 4
+
+# strptime format string
+DATEFORMAT1 %Y-%m-%d
+
+COL_IBAN 0
+COL_SEQUENCE 3
+COL_IBANPAYEE 8
+COL_NAMEPAYEE 9
+COL_CURRENCY 1
+COL_SIGN -1
+COL_AMOUNT 6
+COL_BALANCE 7
+COL_BOOKINGCODE 13
+COL_MEMO 19
+
+
+
+#############################################
+# 0 IBAN/BBAN
+# 1 Munt
+# 2 BIC
+# 3 Volgnr
+# 4 Datum
+# 5 Rentedatum
+# 6 Bedrag
+# 7 Saldo na trn
+# 8 Tegenrekening IBAN/BBAN
+# 9 Naam tegenpartij
+# 10 Naam uiteindelijke partij
+# 11 Naam initiërende partij
+# 12 BIC tegenpartij
+# 13 Code
+# 14 Batch ID
+# 15 Transactiereferentie
+# 16 Machtigingskenmerk
+# 17 Incassant ID
+# 18 Betalingskenmerk
+# 19 Omschrijving-1
+# 20 Omschrijving-2
+# 21 Omschrijving-3
+# 22 Reden retour
+# 23 Oorspr bedrag
+# 24 Oorspr munt
+# 25 Koers

@@ -1,0 +1,47 @@
+# There is 1 header
+SKIPHEADERS 1
+
+# Delimter is a semicolon
+DELIMITER ;
+QUOTECHAR "
+
+# CSV Fields in one row, starting at 0, which will be used
+# to identify the CSV File
+ROW_FINGERPRINT 1
+COL_FINGERPRINT 2
+#H 552-45352
+FINGERPRINTREGEX ^.*[0-9]{3}-[0-9]{5}.*$
+# Parser which will be called when this CSV File matches the fingerprint of this def file
+CSVPARSER readINGCheckingCSV
+
+# Fields, starting at 0
+# Set to -1 if not used
+COL_DATE 0
+
+# strptime format string
+DATEFORMAT1 %Y-%m-%d
+
+COL_IBAN 2
+COL_SEQUENCE -1
+COL_IBANPAYEE 4
+COL_NAMEPAYEE 3
+COL_CURRENCY -1
+COL_AMOUNT 6
+COL_SIGN 5
+COL_BALANCE 10
+COL_BOOKINGCODE -1
+COL_MEMO1 1
+COL_MEMO2 9
+
+#############################################
+#0 Datum;
+#1 "Naam / Omschrijving";
+#2 "Rekening";
+#3 "Tegenrekening";
+#4 "Code";
+#5 "Af Bij";
+#6 "Bedrag (EUR)";
+#7 "Mutatiesoort";
+#8 "Mededelingen";
+#9 "Saldo na mutatie";
+#10 "Tag"

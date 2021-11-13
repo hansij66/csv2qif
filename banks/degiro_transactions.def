@@ -1,0 +1,59 @@
+# DeGiro TRANSACTIONS download
+# NOTE: there is also an option to download DeGiro account; this is a different csv format
+# NOTE: Only ONE DeGiro account is supported (as csv file does not contain any info on account)
+
+# Number of lines at start of csv file and will be skipped
+# There is 1 header
+SKIPHEADERS 1
+
+# Delimiter of csv file
+DELIMITER ,
+QUOTECHAR "
+
+# CSV Fields in one row, starting at 0, which will be used
+# to identify the CSV File
+ROW_FINGERPRINT 0
+COL_FINGERPRINT 5
+# REGEX how to recognize csv file
+FINGERPRINTREGEX ^.*Uitvoeringsplaats.*$
+# Parser which will be called when this CSV File matches the fingerprint of this def file
+CSVPARSER readDeGiroTransactionsCSV
+
+# Associated iban for DeGiro
+CHECKINGACCOUNT NL12ABNA1234567890
+
+
+COL_DATE 0
+
+# strptime format string
+DATEFORMAT1 %d-%m-%Y
+DATEFORMAT2 %d/%m/%Y
+
+# this is a hack, use COL_TIME colomn to store DeGiro IBAN (done by parser)
+COL_IBAN 1
+
+# same COL_SHARENAME
+COL_MEMO 2
+
+#Investments
+#COL_TIME 1
+#COL_SHARENAME 2
+COL_ISIN 3
+COL_STOCKMARKET 4
+#Uitvoeringsplaats
+COL_QUANTITY 6
+COL_PRICE 7
+COL_PRICECURRENCY 8
+#COL_LOCALVALUE 9
+COL_LOCALCURRENCY 10
+COL_AMOUNT 11
+COL_AMOUNTCURRENCY 12
+#COL_EXCHANGERATE 13
+COL_COMMISSION 14
+COL_COMMISSIONCURRENCY 15
+COL_TOTAL 16
+COL_TOTALCURRENCY 17
+COL_ORDERID 18
+
+
+

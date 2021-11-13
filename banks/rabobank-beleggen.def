@@ -1,0 +1,45 @@
+# Rabobank Beleggen
+
+# Number of lines at start of csv file and will be skipped
+# There is 1 header
+SKIPHEADERS 1
+
+# Delimiter of csv file
+DELIMITER ;
+QUOTECHAR "
+
+# CSV Fields in one row, starting at 0, which will be used
+# to identify the CSV File
+ROW_FINGERPRINT 0
+COL_FINGERPRINT 0
+# REGEX how to recognize csv file
+FINGERPRINTREGEX ^.*Portefeuille$
+# Parser which will be called when this CSV File matches the fingerprint of this def file
+CSVPARSER readRabobankBeleggenCSV
+
+# To link this investment account to its checking account
+PARENTACCOUNT nl33rabo0305060678
+
+COL_DATE 2
+
+# strptime format string
+DATEFORMAT1 %d-%m-%Y
+#DATEFORMAT2 %d/%m/%Y
+
+# this is a hack, use COL_TIME colomn to store IBAN (done by parser)
+COL_IBAN 0
+
+COL_MEMO 3
+COL_SHARENAME 1
+COL_ISIN 10
+COL_QUANTITY 4
+COL_PRICE  5
+COL_PRICECURRENCY 6
+COL_COMMISSION 7
+COL_AMOUNT 8
+COL_TOTAL 9
+#COL_TIME 11
+COL_STOCKMARKET 12
+
+
+
