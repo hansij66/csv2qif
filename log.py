@@ -65,7 +65,7 @@ logger = logging.getLogger(script)
 
 # This setLevel determines wich messages are passed on to lower handlers
 logger.setLevel(logging.INFO)  # DEBUG, INFO, WARNING, ERROR, CRITICAL
-logger.propogate = 0
+logger.propagate = False
 
 # Console stdout
 c_handler = logging.StreamHandler(sys.stdout)

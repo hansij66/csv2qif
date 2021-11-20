@@ -17,7 +17,7 @@ Description
         along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 
-__version__ = "1.0.0"
+__version__ = "1.0.1"
 
 
 import os
@@ -339,8 +339,8 @@ if __name__ == '__main__':
     # work around to test from IDE or without specifying
     # csv file om commandline
     # Default False
-    if True:
-    #if False:
+    #if True:
+    if False:
       #infile.append("test/INGSAVING.csv")
       #infile.append("test/INGCHECKING.csv")
       #infile.append("test/degiro_transactions.csv")
