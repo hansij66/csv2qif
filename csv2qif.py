@@ -17,7 +17,7 @@ Description
         along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 
-__version__ = "1.0.1"
+__version__ = "1.0.2"
 
 
 import os
@@ -31,6 +31,10 @@ from log import logger
 import logging
 # This setLevel determines which messages are passed on to lower handlers
 logger.setLevel(logging.INFO)  # DEBUG, INFO, WARNING, ERROR, CRITICAL
+
+# Todo fix
+BASEPATH = os.path.dirname(os.path.realpath(__file__))
+
 
 
 def close(exit_code):
@@ -237,10 +241,10 @@ def main(listoffiles_, outfile_):
 
   # read which GnuCash accounts exists
   # dictionary of multiple key:value pairs --> account number:(gnucash account name, priority, qif account)
-  account_dict = readBankAccounts("bankaccounts.def")
+  account_dict = readBankAccounts(BASEPATH + "/bankaccounts.def")
 
   # read category regex; to format payee & categories
-  category_regex = categories.readCategory("categories.csv")
+  category_regex = categories.readCategory(BASEPATH + "/categories.csv")
 
   csvlist = []
   # start processing csv files....
@@ -258,8 +262,6 @@ def main(listoffiles_, outfile_):
     if bankdefinitionfile == "DUPLICATE":
       logger.error(f"CSV file: {file} matches multiple bank parsers - change fingerpint, exiting.....")
       close(0)
-
-    logger.info(f"csv file: {file} matched with bank definition file: {bankdefinitionfile}")
 
     # read csv's with a bank definition file
     # return list to store account csv file
@@ -304,7 +306,7 @@ output: out.qif
 """
 if __name__ == '__main__':
   logger.debug("__main__: >>")
-  #signal.signal(signal.SIGINT, exit_gracefully)
+  logger.info(f"Starting csv2qif version {__version__}")
 
   # list of input csv files
   infile = []
@@ -333,21 +335,26 @@ if __name__ == '__main__':
       outfile = "out.qif"
 
   except:
-    logger.error(f"usage {os.path.basename(sys.argv[0])} <file1.csv> <file2.csv>")
-    logger.error(f"usage {os.path.basename(sys.argv[0])} <*.csv>")
+    logger.info(f"usage {os.path.basename(sys.argv[0])} <file1.csv> <file2.csv>")
+    logger.info(f"usage {os.path.basename(sys.argv[0])} <*.csv>")
 
     # work around to test from IDE or without specifying
     # csv file om commandline
     # Default False
     #if True:
     if False:
-      #infile.append("test/INGSAVING.csv")
-      #infile.append("test/INGCHECKING.csv")
-      #infile.append("test/degiro_transactions.csv")
-      infile.append("test/degiro_account.csv")
-      #infile.append("test/RABOHANSBELEGGEN.csv")
-
+      #infile.append(BASEPATH + "/test/INGSAVING.csv")
+      #infile.append(BASEPATH + "/test/INGCHECKING.csv")
+      infile.append(BASEPATH + "/test/degiro_transactions.csv")
+      #infile.append(BASEPATH + "/test/degiro_account.csv")
+      #infile.append(BASEPATH + "/test/RABOHANSBELEGGEN.csv")
+      outfile = "out.qif"
+    else:
+      infile.append(BASEPATH + "/csv/INGCHECKING.csv")
       outfile = "out.qif"
 
+    #logger.info(f"Use defaults: \nINPUT = {infile} \nOUTPUT = {outfile}")
+
+  logger.info(f"Use defaults: \nINPUT = {infile} \nOUTPUT = {outfile}")
   main(infile, outfile)
   close(0)

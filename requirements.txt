@@ -1,8 +1,9 @@
 # if you don't want to mix global apt management of python modules
 # with pip installs
 # This will install quiffen (not in debian apt) in your user directory
-pip3 install --user quiffen
+# pip3 install --user quiffen
+quiffen
 
 # tested versions
-quiffen 1.1.1, 1.1.2
-python  3.7.3
+#quiffen 1.1.1, 1.1.2
+#python  3.7.3

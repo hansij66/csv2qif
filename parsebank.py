@@ -28,6 +28,8 @@ import csv
 from datetime import datetime
 import fileinput
 
+
+
 # logging
 import __main__
 import logging
@@ -41,6 +43,7 @@ logger = logging.getLogger(script + "." +  __name__)
 # without path
 # TODO remove global variable
 listofbanks = []
+BASEPATH = os.path.dirname(os.path.realpath(__file__))
 
 
 def sanitizeString(line, lowercase=False):
@@ -91,7 +94,7 @@ def queryBankDefFiles():
   Keyword arguments:
   """
 
-  for file in os.listdir("banks"):
+  for file in os.listdir(BASEPATH + "/banks"):
     if file.endswith(".def"):
       listofbanks.append(file)
   return 0
@@ -146,7 +149,7 @@ def determineBank(infile):
 
   # iterate through all bank definition files
   for bank in listofbanks:
-    definitionfile = "banks/" + bank
+    definitionfile = BASEPATH + "/banks/" + bank
     logger.debug(f"Matching {infile} with{definitionfile} .........................")
 
     definition_dict = readDefinitionFile(definitionfile)

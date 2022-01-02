@@ -40,3 +40,9 @@ With a bit of luck, you can use an existing parser. Or copy and extend.
 ## Requirements
 * quiffen > 1.1.1
 * python > 3.x (tested with 3.7.3)
+
+## Versions
+
+1.0.2:
+* Fix error processing when command line is empty
+* Fix errors when calling from different location/directory or via symbolic link
