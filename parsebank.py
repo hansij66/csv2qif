@@ -52,11 +52,11 @@ def sanitizeString(line, lowercase=False):
   Removes duplicate spaces
   Optionally, converts string to lower case
 
-  Keyword arguments:
-  :param str line
-  :param bool lowercase
+  :param str line:
+  :param bool lowercase:
   :return sanitized line
   :rtype str
+
   """
 
   line = line.lstrip()
@@ -72,19 +72,23 @@ def convertDecimalComma(amount):
   Convert decimal comma to decimal point notation
   25.400,05 --> 25400.05
 
-  Keyword arguments:
-  :param str amount
-  :return amount
+  Removes any non digits (as Rabobank certificaten add %)
+
+  :param str amount: amount to be converted
+  :return sanitized amount:
   :rtype str
   """
 
   # remove decimal point
-  amount = amount.replace(".", "", 1)
+  __amount = amount.replace(".", "", 1)
 
   # replace decimal comma with decimal point
-  amount = amount.replace(",", ".", 1)
+  __amount = __amount.replace(",", ".", 1)
 
-  return amount
+  # remove keep all digits, decimal point and minus; remove all others
+  __amount = re.sub("[^\d|.|-]", "", __amount)
+
+  return __amount
 
 
 def queryBankDefFiles():
@@ -190,8 +194,7 @@ def readRabobankCheckingCSV(csvfile_, definitionfile_, csvlist):
   """
   Parse Rabobank Checking/Regular account CSV file
   
-  Keyword arguments:
-  :param str csvFile_: Path + Filename to bank csv file
+  :param str csvfile_: Path + Filename to bank csv file
   :param str definitionfile_:Path + Filename to definition file of bank
   :param list of dictionaries csvlist: list of dictionaries of parsed transactions
   """
@@ -263,7 +266,7 @@ def readINGCheckingCSV(csvfile_, definitionfile_, csvlist):
   Parse ING Checking/Regular account CSV file
 
   Keyword arguments:
-  :param str csvFile_: Path + Filename to bank csv file
+  :param str csvfile_: Path + Filename to bank csv file
   :param str definitionfile_:Path + Filename to definition file of bank
   :param list of dictionaries csvlist: list of dictionaries of parsed transactions csvlist
   """
@@ -335,7 +338,7 @@ def readDeGiroTransactionsCSV(csvfile_, definitionfile_, csvlist):
   Dividends and costs are via DeGiro ACCOUNTS CSV file
 
   Keyword arguments:
-  :param str csvFile_: Path + Filename to bank csv file
+  :param str csvfile_: Path + Filename to bank csv file
   :param str definitionfile_:Path + Filename to definition file of bank
   :param list of dictionaries csvlist: list of dictionaries of parsed transactions csvlist
   """
@@ -412,7 +415,8 @@ def readDeGiroTransactionsCSV(csvfile_, definitionfile_, csvlist):
       # positive number == expense
       try:
         row[commission_] = str(-1.0*(float(row[commission_])))
-      except: None
+      except:
+        None
 
       # It seems that:
       # amount = price * quantity + commission
@@ -449,7 +453,7 @@ def readDeGiroAccountCSV(csvfile_, definitionfile_, csvlist):
   It is not 100% perfect...typically a few dimes off....DeGiro has IMO inconsistent csv file structure
 
   Keyword arguments:
-  :param str csvFile_: Path + Filename to bank csv file
+  :param str csvfile_: Path + Filename to bank csv file
   :param str definitionfile_:Path + Filename to definition file of bank
   :param list of dictionaries csvlist: list of dictionaries of parsed transactions csvlist
   """
@@ -545,7 +549,7 @@ def readRabobankBeleggenCSV(csvfile_, definitionfile_, csvlist):
   does not have to be true;
 
   Keyword arguments:
-  :param str csvFile_: Path + Filename to bank csv file
+  :param str csvfile_: Path + Filename to bank csv file
   :param str definitionfile_:Path + Filename to definition file of bank
   :param list of dictionaries csvlist: list of dictionaries of parsed transactions csvlist
   """
@@ -571,7 +575,7 @@ def readRabobankBeleggenCSV(csvfile_, definitionfile_, csvlist):
   transfer_amount_ = int(definition_dict['COL_TOTAL']) # Total amount of transaction
   #currency_ = int(definition_dict['COL_PRICECURRENCY'])
 
-  # Rabobank beleggen csv files truncates last comlumns when empty
+  # Rabobank beleggen csv files truncates last colomns when empty
   # Rewrite csv file with constant nrof columns per row
   statement = list( csv.reader(fileinput.input(files=(csvfile_)), delimiter=delimiter_, quotechar=quotechar_) )
   maxFields = max( len(i) for i in statement )  # how many fields?
@@ -620,8 +624,6 @@ def readRabobankBeleggenCSV(csvfile_, definitionfile_, csvlist):
       if re.match( "^.*koop internet.*$", row[memo_].lower() ) or \
          re.match("^.*verkoop internet.*$", row[memo_].lower()):
 
-        # Calculate commission from difference transfer amount and value of purchase
-        # Round to 2 digits
         a = abs(float(row[transfer_amount_]))
         b = abs(float(row[amount_]))
         row[commission_] = format( abs(a - b), '.2f')

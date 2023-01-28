@@ -1,4 +1,7 @@
 # Rabobank Beleggen
+# Update for v1.0.3 (Jan 2023)
+# Only fund transactions are converted;
+# All cash amounts (dividend etc) will be processed via PARENTACCOUNT
 
 # Number of lines at start of csv file and will be skipped
 # There is 1 header
@@ -18,7 +21,7 @@ FINGERPRINTREGEX ^.*Portefeuille$
 CSVPARSER readRabobankBeleggenCSV
 
 # To link this investment account to its checking account
-PARENTACCOUNT nl33rabo0305060678
+PARENTACCOUNT NL12ABNA1234567890
 
 COL_DATE 2
 
@@ -31,15 +34,15 @@ COL_IBAN 0
 
 COL_MEMO 3
 COL_SHARENAME 1
-COL_ISIN 10
-COL_QUANTITY 4
-COL_PRICE  5
-COL_PRICECURRENCY 6
-COL_COMMISSION 7
-COL_AMOUNT 8
-COL_TOTAL 9
-#COL_TIME 11
-COL_STOCKMARKET 12
+COL_ISIN 11
+COL_QUANTITY 5
+COL_PRICE 6
+COL_PRICECURRENCY 7
+COL_COMMISSION 8
+COL_AMOUNT 9
+COL_TOTAL 10
+#COL_TIME 12
+COL_STOCKMARKET 13
 
 
 

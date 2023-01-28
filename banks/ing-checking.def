@@ -1,3 +1,8 @@
+# ING Betaal rekening (Checking)
+# Download CSV with semicolon
+# Download in DUTCH language
+
+
 # There is 1 header
 SKIPHEADERS 1
 

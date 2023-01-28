@@ -1,20 +1,3 @@
-#!/usr/bin/python3
-
-"""
-        This program is free software: you can redistribute it and/or modify
-        it under the terms of the GNU General Public License as published by
-        the Free Software Foundation, either version 3 of the License, or
-        (at your option) any later version.
-
-        This program is distributed in the hope that it will be useful,
-        but WITHOUT ANY WARRANTY; without even the implied warranty of
-        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-        GNU General Public License for more details.
-
-        You should have received a copy of the GNU General Public License
-        along with this program.  If not, see <http://www.gnu.org/licenses/>.
-"""
-
 """
  DESCRIPTION
 
@@ -34,15 +17,41 @@ logger.setLevel(logging.DEBUG)  # DEBUG, INFO, WARNING, ERROR, CRITICAL
 ====================================================================
 import __main__
 import logging
+import os
 script=os.path.basename(__main__.__file__)
 script=os.path.splitext(script)[0]
 logger = logging.getLogger(script + "." +  __name__)
 ====================================================================
 
+V1.1.0
+  31-10-2021
+  Disable syslog handler for non linux platforms
+
 V0.1:
 - initial version
 
+
+        This program is free software: you can redistribute it and/or modify
+        it under the terms of the GNU General Public License as published by
+        the Free Software Foundation, either version 3 of the License, or
+        (at your option) any later version.
+
+        This program is distributed in the hope that it will be useful,
+        but WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+        GNU General Public License for more details.
+
+        You should have received a copy of the GNU General Public License
+        along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+
+
 """
+
+__version__ = "1.1.0"
+__author__  = "Hans IJntema"
+__license__ = "GPLv3"
+
 
 
 # ------------------------------------------------------------------------------------
@@ -75,7 +84,6 @@ c_format = logging.Formatter('%(name)s %(levelname)s: FUNCTION:%(funcName)s LINE
 c_handler.setFormatter(c_format)
 logger.addHandler(c_handler)
 
-
 # Syslog
 if sys.platform == "linux":
   s_handler = logging.handlers.SysLogHandler( address=('/dev/log') )
@@ -84,6 +92,7 @@ if sys.platform == "linux":
   s_format = logging.Formatter('%(name)s[%(process)d] %(levelname)s: %(asctime)s FUNCTION:%(funcName)s LINE:%(lineno)d: %(message)s', datefmt='%H:%M:%S')
   s_handler.setFormatter(s_format)
   logger.addHandler(s_handler)
+
 
 # File
 # Test if /dev/shm is writable otherwise use /tmp

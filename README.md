@@ -42,6 +42,8 @@ With a bit of luck, you can use an existing parser. Or copy and extend.
 * python > 3.x (tested with 3.7.3)
 
 ## Versions
+1.0.3:
+* Rabobank beleggen (investments) changed output format CSV
 
 1.0.2:
 * Fix error processing when command line is empty
